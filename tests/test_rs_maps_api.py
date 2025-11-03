@@ -14,6 +14,7 @@ class TestLocationLifecycle:
         Checking.check_status_code(get_result, 200)
         Checking.check_json_token(get_result, ['location', 'accuracy', 'name',
                                                 'phone_number', 'address', 'types', 'website', 'language'])
+        Checking.check_json_filds(get_result, "status", "OK")
 
         print("\nPUT: изменение адреса локации")
         put_result: Response = RsMapsApi.put_location(place_id)
