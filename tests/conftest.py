@@ -1,14 +1,14 @@
 import pytest
 from requests import Response
-
 from utils.api import RsMapsApi
 from utils.checks import Checking
+from logger_config import logger
 
 
 @pytest.fixture
 def created_location():
     """Фикстура для создания локации и возвращения её place_id"""
-    print("\nPOST: создание локации (предусловие)")
+    logger.info("\nPOST: создание локации (предусловие)")
     post_result: Response = RsMapsApi.create_location()
     check_post_result = post_result.json()
     place_id = check_post_result.get("place_id")
