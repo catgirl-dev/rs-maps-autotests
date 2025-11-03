@@ -11,7 +11,7 @@ DELETE_RESOURCE: str = "/maps/api/place/delete/json"
 
 
 class RsMapsApi:
-    """ Методы для тестирования RS Maps API """
+    """Методы для тестирования RS Maps API"""
     @staticmethod
     def create_location():
         post_url: str = f"{BASE_URL}{POST_RESOURCE}?{KEY}"

@@ -3,8 +3,9 @@ from requests import Response
 from utils.api import RsMapsApi
 from utils.checks import Checking
 
-class TestCreateLocation:
-    def test_create_location(self, created_location):
+class TestLocationLifecycle:
+    """Проверка жизненного цикла локации: создание -> чтение -> обновление -> удаление"""
+    def test_location_lifecycle(self, created_location):
         print("\nPOST: создание локации")
         post_result: Response = RsMapsApi.create_location()
         check_post_result = post_result.json()
@@ -39,4 +40,4 @@ class TestCreateLocation:
         Checking.check_status_code(get_result, 404)
         Checking.check_json_token(get_result, ["msg"])
 
-        print("Тестирование прошло успешно")
+        print("Тестирование жизненного цикла локации прошло успешно!")
