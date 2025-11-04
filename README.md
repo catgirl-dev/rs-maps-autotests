@@ -19,13 +19,10 @@ pytest tests/test_rs_maps_api.py
 ```bash
 allure serve allure-results
 ```
+## 📖 Внешний вид Allure отчёта
+<img width="508" height="353" alt="image" src="https://github.com/user-attachments/assets/f4c71467-9a65-43be-b481-416575038842" />
+
 ## 📝 Настройки логгирования и фикстур
 * Логи можно отключить или настроить через logger_config.py
 * Фикстуры можно настроить через conftest.py
 ---
-
-
-
-
-
-
