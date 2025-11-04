@@ -1,6 +1,6 @@
 # Rahul Shetty Maps API Autotests
 
-Автоматизированные тесты для проверки функционала **Rahul Shetty Maps API**.
+Автоматизированные тесты для проверки функционала **[Rahul Shetty Maps API](https://rahulshettyacademy.com)**.
 Тесты написаны с использованием **Python**, **Pytest**, **Requests**, **Allure** и **Loguru**.
 ## ⚙️ Установка зависимостей
 ```bash
