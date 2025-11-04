@@ -16,7 +16,7 @@ class RsMapsApi:
     @staticmethod
     def create_location():
         post_url: str = f"{BASE_URL}{POST_RESOURCE}?{KEY}"
-        logger.info(f"Url: {post_url}")
+        logger.info(f"Url запроса: {post_url}")
         post_body: dict[str, list[str] | str | int | dict[str, float]] = {
             "location": {
                 "lat": -38.383494,
@@ -32,19 +32,22 @@ class RsMapsApi:
             "website": "http://google.com",
             "language": "French-IN"
         }
+        logger.info(f"Тело запроса: {post_body}")
 
         post_result: Response = HttpMethods.post(post_url, post_body)
-        logger.info(f"Body: {post_result.text}")
-        logger.info(f"Статус-код: {post_result.status_code}")
+        logger.info(f"Заголовки ответа: {post_result.headers}")
+        logger.info(f"Тело ответа: {post_result.text}")
+        logger.info(f"Статус-код ответа: {post_result.status_code}")
         return post_result
 
     @staticmethod
     def get_location(place_id):
         get_url: str = f"{BASE_URL}{GET_RESOURCE}?{KEY}&place_id={place_id}"
-        logger.info(f"Url: {get_url}")
+        logger.info(f"Url запроса: {get_url}")
         get_result: Response = HttpMethods.get(get_url)
-        logger.info(f"Body: {get_result.text}")
-        logger.info(f"Статус-код: {get_result.status_code}")
+        logger.info(f"Заголовки ответа: {get_result.headers}")
+        logger.info(f"Тело ответа: {get_result.text}")
+        logger.info(f"Статус-код ответа: {get_result.status_code}")
         return get_result
 
     @staticmethod
@@ -55,10 +58,12 @@ class RsMapsApi:
             "address": "100 Lenina street, RU",
             "key": "qaclick123"
         }
-        logger.info(f"Url: {put_url}")
+        logger.info(f"Url запроса: {put_url}")
+        logger.info(f"Тело запроса: {put_body}")
         put_result: Response = HttpMethods.put(put_url, put_body)
-        logger.info(f"Body: {put_result.text}")
-        logger.info(f"Статус-код: {put_result.status_code}")
+        logger.info(f"Заголовки ответа: {put_result.headers}")
+        logger.info(f"Тело ответа: {put_result.text}")
+        logger.info(f"Статус-код ответа: {put_result.status_code}")
         return put_result
 
     @staticmethod
@@ -67,8 +72,10 @@ class RsMapsApi:
         delete_body: dict[str, list[str] | str | int | dict[str, float]] = {
             "place_id": place_id
         }
-        logger.info(f"Url: {delete_url}")
+        logger.info(f"Url запроса: {delete_url}")
+        logger.info(f"Тело запроса: {delete_body}")
         delete_result: Response = HttpMethods.delete(delete_url, delete_body)
-        logger.info(f"Body: {delete_result.text}")
-        logger.info(f"Статус-код: {delete_result.status_code}")
+        logger.info(f"Заголовки ответа: {delete_result.headers}")
+        logger.info(f"Тело ответа: {delete_result.text}")
+        logger.info(f"Статус-код ответа: {delete_result.status_code}")
         return delete_result
