@@ -20,7 +20,7 @@ pytest tests/test_rs_maps_api.py
 allure serve allure-results
 ```
 ## 📖 Внешний вид Allure отчёта
-<img width="508" height="353" alt="image" src="https://github.com/user-attachments/assets/f4c71467-9a65-43be-b481-416575038842" />
+<img width="600" height="370" alt="image" src="https://github.com/user-attachments/assets/5a8834da-6a7b-4ec0-a095-c7b9069e2e18" />
 
 ## 📝 Настройки логгирования и фикстур
 * Логи можно отключить или настроить через logger_config.py
