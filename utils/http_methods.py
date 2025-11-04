@@ -1,3 +1,4 @@
+import allure
 import requests
 
 from requests import Response
@@ -10,35 +11,39 @@ class HttpMethods:
 
     @staticmethod
     def post(url, body):
-        result: Response = requests.post(
-            url,
-            headers=HttpMethods.headers,
-            cookies=HttpMethods.cookie,
-            json=body)
-        return result
+        with allure.step("POST request"):
+            result: Response = requests.post(
+                url,
+                headers=HttpMethods.headers,
+                cookies=HttpMethods.cookie,
+                json=body)
+            return result
 
     @staticmethod
     def get(url):
-        result: Response = requests.get(
-            url,
-            headers=HttpMethods.headers,
-            cookies=HttpMethods.cookie)
-        return result
+        with allure.step("GET request"):
+            result: Response = requests.get(
+                url,
+                headers=HttpMethods.headers,
+                cookies=HttpMethods.cookie)
+            return result
 
     @staticmethod
     def put(url, body):
-        result: Response = requests.put(
-            url,
-            headers=HttpMethods.headers,
-            cookies=HttpMethods.cookie,
-            json=body)
-        return result
+        with allure.step("PUT request"):
+            result: Response = requests.put(
+                url,
+                headers=HttpMethods.headers,
+                cookies=HttpMethods.cookie,
+                json=body)
+            return result
 
     @staticmethod
     def delete(url, body):
-        result: Response = requests.delete(
-            url,
-            headers=HttpMethods.headers,
-            cookies=HttpMethods.cookie,
-            json=body)
-        return result
+        with allure.step("DELETE request"):
+            result: Response = requests.delete(
+                url,
+                headers=HttpMethods.headers,
+                cookies=HttpMethods.cookie,
+                json=body)
+            return result

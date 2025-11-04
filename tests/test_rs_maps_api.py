@@ -2,8 +2,11 @@ from utils.api import RsMapsApi
 from utils.checks import Checking
 from requests import Response
 from logger_config import logger
+import allure
 
 
+
+@allure.epic("RsMapsApi: TestLocationLifecycle")
 class TestLocationLifecycle:
     """Проверка жизненного цикла локации: создание -> чтение -> обновление -> удаление"""
     def test_location_lifecycle(self, created_location):
@@ -44,6 +47,8 @@ class TestLocationLifecycle:
         logger.success("Тестирование жизненного цикла локации прошло успешно!")
 
 
+
+@allure.epic("RsMapsApi: TestLocationNegative")
 class TestLocationNegative:
     """Негативное тестирование"""
     def test_get_location_without_place_id(self):
@@ -80,6 +85,8 @@ class TestLocationNegative:
         logger.success("Негативное тестирование на удаление несуществующей локации прошло успешно!")
 
 
+
+@allure.epic("RsMapsApi: TestLocationLocal")
 class TestLocationLocal:
     """Тестирование отдельных операций с локацией"""
     def test_only_create_location(self, created_location):
