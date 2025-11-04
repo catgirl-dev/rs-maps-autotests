@@ -1,6 +1,6 @@
 import pytest
 from requests import Response
-from utils.api import RsMapsApi
+from utils.rs_maps_api import RsMapsApi
 from utils.checks import Checking
 from logger_config import logger
 
