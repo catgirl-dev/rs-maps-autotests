@@ -24,8 +24,11 @@ class Checking:
     @staticmethod
     def check_json_filds(response: Response, field_name: str, expected_value: Any):
         """Проверка содержимого обязательных полей"""
-        check = response.json
+        check = dict(response.json())
         check_info: Any = check.get(field_name)
-        assert check_info == expected_value, (f"Содержимое поля {field_name} "
-                                              f"не соответствует ожидаемому {expected_value}")
-        logger.success(f"Проверка содержимого поля {field_name} прошла успешно!")
+        assert check_info == expected_value, (
+            f"Содержимое поля '{field_name}' "
+            f"({check_info}) не соответствует ожидаемому {expected_value}"
+        )
+        logger.success(f"Проверка содержимого поля '{field_name}' прошла успешно! "
+                       f"Значение: {check_info}")
