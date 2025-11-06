@@ -19,7 +19,7 @@ pytest tests/test_rs_maps_api.py
 ```bash
 allure serve allure-results
 ```
-## 📖 Внешний вид Allure отчёта
+## 📖 Внешний вид некоторых вкладок Allure
 * Overview
 <img width="600" height="370" alt="image" src="https://github.com/user-attachments/assets/025ca39d-8892-48a8-a4d2-51b23a392ede" />
 
@@ -28,16 +28,13 @@ allure serve allure-results
 <img width="600" height="270" alt="image" src="https://github.com/user-attachments/assets/60f4c60b-4476-4301-94ad-69b1eb102600" />
 
 
-* Suites
-<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/ae09052c-0aa9-466c-a357-4713e0716bbb" />
-
-
 * Graphs
 <img width="600" height="370" alt="image" src="https://github.com/user-attachments/assets/22e94144-a67b-4e68-96b8-d043b9fc953b" />
 
 
-* Behaviors
-<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/db21f931-fa8d-4ed7-9519-b48133211b02" />
+* Behaviors c логами
+<img width="600" height="370" alt="image" src="https://github.com/user-attachments/assets/d23e3f74-4a68-4984-8bed-499d5f9fc4ac" />
+
 
 
 ## 📝 Настройки логгирования и фикстур
