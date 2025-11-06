@@ -19,7 +19,7 @@ pytest tests/test_rs_maps_api.py
 ```bash
 allure serve allure-results
 ```
-## 📖 Внешний вид некоторых вкладок Allure
+## 📖 Внешний вид некоторых вкладок Allure отчёта
 * Overview
 <img width="600" height="370" alt="image" src="https://github.com/user-attachments/assets/025ca39d-8892-48a8-a4d2-51b23a392ede" />
 
