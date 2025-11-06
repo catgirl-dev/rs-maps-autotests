@@ -1,3 +1,5 @@
+from allure_commons.types import Severity
+
 from utils.rs_maps_api import RsMapsApi
 from utils.checks import Checking
 from requests import Response
@@ -10,6 +12,7 @@ import allure
 @allure.feature("Жизненный цикл локации")
 class TestLocationLifecycle:
     """Проверка жизненного цикла локации: создание → чтение → обновление → удаление"""
+    @allure.severity(Severity.CRITICAL)
     @allure.title("Полный цикл: создание, обновление и удаление локации")
     def test_location_full_lifecycle(self, created_location):
         place_id = created_location
@@ -73,6 +76,7 @@ class TestLocationLifecycle:
 @allure.feature("Негативные тесты API локаций")
 class TestLocationNegative:
     """Проверка поведения API при некорректных входных данных"""
+    @allure.severity(Severity.NORMAL)
     @allure.title("GET: получение локации с пустым place_id ('')")
     def test_get_location_with_empty_place_id(self):
         with allure.step("GET: попытка получить локацию с пустым place_id('')"):
@@ -85,6 +89,7 @@ class TestLocationNegative:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка GET с пустым place_id('') прошла успешно!")
 
+    @allure.severity(Severity.NORMAL)
     @allure.title("PUT: обновление локации с пустым place_id ('')")
     def test_update_location_with_empty_place_id(self):
         with allure.step("PUT запрос с пустым place_id ('')"):
@@ -95,6 +100,7 @@ class TestLocationNegative:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка PUT с пустым place_id прошла успешно!")
 
+    @allure.severity(Severity.NORMAL)
     @allure.title("DELETE: удаление локации с пустым place_id ('')")
     def test_delete_location_with_empty_place_id(self):
         with allure.step("DELETE: удаление локации с пустым place_id ('')"):
@@ -105,6 +111,7 @@ class TestLocationNegative:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка DELETE с пустым place_id прошла успешно!")
 
+    @allure.severity(Severity.NORMAL)
     @allure.title("GET: получение несуществующей локации (place_id='0000000000')")
     def test_get_location_with_nonexistent_id(self):
         fake_place_id: str = "0000000000"
@@ -117,6 +124,7 @@ class TestLocationNegative:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка GET несуществующей локации прошла успешно!")
 
+    @allure.severity(Severity.NORMAL)
     @allure.title("DELETE: удаление несуществующей локации (place_id='0000000000')")
     def test_delete_location_with_nonexistent_id(self):
         fake_place_id = "0000000000"
@@ -135,6 +143,7 @@ class TestLocationNegative:
 @allure.feature("Позитивное тестирование отдельных операций")
 class TestLocationSingleOperation:
     """Проверка отдельных операций: создание, чтение, обновление и удаление"""
+    @allure.severity(Severity.CRITICAL)
     @allure.title("Создание локации и проверка результата")
     def test_create_location_only(self, created_location):
         place_id = created_location
@@ -150,6 +159,7 @@ class TestLocationSingleOperation:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Создание локации проверено успешно!")
 
+    @allure.severity(Severity.CRITICAL)
     @allure.title("Получение существующей локации по place_id")
     def test_get_location_only(self, created_location):
         place_id = created_location
@@ -163,6 +173,7 @@ class TestLocationSingleOperation:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Получение локации проверено успешно!")
 
+    @allure.severity(Severity.CRITICAL)
     @allure.title("Обновление адреса локации и проверка изменений")
     def test_update_location_only(self, created_location):
         place_id = created_location
@@ -184,6 +195,7 @@ class TestLocationSingleOperation:
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Обновление локации проверено успешно!")
 
+    @allure.severity(Severity.CRITICAL)
     @allure.title("Удаление локации и проверка её удаления")
     def test_delete_location_only(self, created_location):
         place_id = created_location
