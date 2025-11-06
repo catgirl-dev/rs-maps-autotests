@@ -22,7 +22,7 @@ class Checking:
         logger.success("Все ожидаемые поля присутствуют")
 
     @staticmethod
-    def check_json_filds(response: Response, field_name: str, expected_value: Any):
+    def check_json_fields(response: Response, field_name: str, expected_value: Any):
         """Проверка содержимого обязательных полей"""
         check = dict(response.json())
         check_info: Any = check.get(field_name)

@@ -7,10 +7,9 @@ import allure
 
 
 @allure.parent_suite("RsMaps API")
-@allure.suite("Жизненный цикл локации")
+@allure.feature("Жизненный цикл локации")
 class TestLocationLifecycle:
     """Проверка жизненного цикла локации: создание → чтение → обновление → удаление"""
-
     @allure.title("Полный цикл: создание, обновление и удаление локации")
     def test_location_full_lifecycle(self, created_location):
         place_id = created_location
@@ -31,7 +30,7 @@ class TestLocationLifecycle:
             put_result: Response = RsMapsApi.put_location(place_id)
             Checking.check_status_code(put_result, 200)
             Checking.check_json_token(put_result, ["msg"])
-            Checking.check_json_filds(put_result, 'msg', 'Address successfully updated')
+            Checking.check_json_fields(put_result, 'msg', 'Address successfully updated')
             allure.attach(put_result.text, name="PUT Response",
                           attachment_type=allure.attachment_type.JSON)
 
@@ -40,7 +39,7 @@ class TestLocationLifecycle:
             get_result: Response = RsMapsApi.get_location(place_id)
             Checking.check_status_code(get_result, 200)
             Checking.check_json_token(get_result, [['location', 'name', 'address']])
-            Checking.check_json_filds(get_result, 'address', '100 Lenina street, RU')
+            Checking.check_json_fields(get_result, 'address', '100 Lenina street, RU')
             allure.attach(get_result.text, name="GET after PUT Response",
                           attachment_type=allure.attachment_type.JSON)
 
@@ -49,7 +48,7 @@ class TestLocationLifecycle:
             delete_result: Response = RsMapsApi.delete_location(place_id)
             Checking.check_status_code(delete_result, 200)
             Checking.check_json_token(delete_result, ["status"])
-            Checking.check_json_filds(delete_result, 'status', 'OK')
+            Checking.check_json_fields(delete_result, 'status', 'OK')
             allure.attach(delete_result.text, name="DELETE Response",
                           attachment_type=allure.attachment_type.JSON)
 
@@ -58,7 +57,7 @@ class TestLocationLifecycle:
             get_result: Response = RsMapsApi.get_location(place_id)
             Checking.check_status_code(get_result, 404)
             Checking.check_json_token(get_result, ["msg"])
-            Checking.check_json_filds(
+            Checking.check_json_fields(
                 get_result,
                 "msg",
                 "Get operation failed, looks like place_id  doesn't exists"
@@ -69,51 +68,52 @@ class TestLocationLifecycle:
         logger.success("Жизненный цикл локации успешно протестирован!")
 
 
+
 @allure.parent_suite("RsMaps API")
-@allure.suite("Негативные тесты API локаций")
+@allure.feature("Негативные тесты API локаций")
 class TestLocationNegative:
     """Проверка поведения API при некорректных входных данных"""
-
     @allure.title("GET: получение локации с пустым place_id ('')")
     def test_get_location_with_empty_place_id(self):
         with allure.step("GET: попытка получить локацию с пустым place_id('')"):
-            logger.info("GET запрос с пустым place_id")
+            logger.info("GET: попытка получить локацию с пустым place_id('')")
             get_result = RsMapsApi.get_location("")
             Checking.check_status_code(get_result, 404)
-            Checking.check_json_filds(get_result, 'msg',
+            Checking.check_json_fields(get_result, 'msg',
                                       "Get operation failed, looks like place_id  doesn't exists")
-            allure.attach(get_result.text, name="GET Empty place_id Response",
+            allure.attach(get_result.text, name="GET: попытка получить локацию с пустым place_id('')",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка GET с пустым place_id('') прошла успешно!")
 
     @allure.title("PUT: обновление локации с пустым place_id ('')")
     def test_update_location_with_empty_place_id(self):
-        with allure.step("PUT: попытка обновить локацию с пустым place_id('')"):
-            logger.info("PUT запрос с пустым place_id")
+        with allure.step("PUT запрос с пустым place_id ('')"):
+            logger.info("PUT запрос с пустым place_id ('')")
             put_result = RsMapsApi.put_location("")
             Checking.check_status_code(put_result, 404)
-            allure.attach(put_result.text, name="PUT Empty place_id Response",
+            allure.attach(put_result.text, name="PUT запрос с пустым place_id ('')",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка PUT с пустым place_id прошла успешно!")
 
     @allure.title("DELETE: удаление локации с пустым place_id ('')")
     def test_delete_location_with_empty_place_id(self):
-        with allure.step("DELETE: попытка удалить локацию с пустым place_id"):
-            logger.info("DELETE запрос с пустым place_id")
+        with allure.step("DELETE: удаление локации с пустым place_id ('')"):
+            logger.info("DELETE: удаление локации с пустым place_id ('')")
             delete_result: Response = RsMapsApi.delete_location("")
             Checking.check_status_code(delete_result, 404)
-            allure.attach(delete_result.text, name="DELETE Empty place_id Response",
+            allure.attach(delete_result.text, name="DELETE: удаление локации с пустым place_id ('')",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка DELETE с пустым place_id прошла успешно!")
 
     @allure.title("GET: получение несуществующей локации (place_id='0000000000')")
     def test_get_location_with_nonexistent_id(self):
-        fake_place_id = "0000000000"
-        with allure.step(f"GET: попытка получить несуществующую локацию ({fake_place_id})"):
+        fake_place_id: str = "0000000000"
+        with allure.step(f"GET запрос несуществующей локации place_id={fake_place_id})"):
             logger.info(f"GET запрос несуществующей локации place_id={fake_place_id}")
             get_result: Response = RsMapsApi.get_location(fake_place_id)
             Checking.check_status_code(get_result, 404)
-            allure.attach(get_result.text, name="GET Nonexistent Response",
+            allure.attach(get_result.text,
+                          name=f"GET запрос несуществующей локации place_id={fake_place_id}",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Проверка GET несуществующей локации прошла успешно!")
 
@@ -129,11 +129,12 @@ class TestLocationNegative:
             logger.success("Проверка DELETE несуществующей локации прошла успешно!")
 
 
+
+
 @allure.parent_suite("RsMaps API")
-@allure.suite("Позитивное тестирование отдельных операций")
+@allure.feature("Позитивное тестирование отдельных операций")
 class TestLocationSingleOperation:
     """Проверка отдельных операций: создание, чтение, обновление и удаление"""
-
     @allure.title("Создание локации и проверка результата")
     def test_create_location_only(self, created_location):
         place_id = created_location
@@ -157,7 +158,7 @@ class TestLocationSingleOperation:
             get_result: Response = RsMapsApi.get_location(place_id)
             Checking.check_status_code(get_result, 200)
             Checking.check_json_token(get_result, [['location', 'name', 'address']])
-            Checking.check_json_filds(get_result, "status", "OK")
+            Checking.check_json_fields(get_result, "status", "OK")
             allure.attach(get_result.text, name="GET Response",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Получение локации проверено успешно!")
@@ -170,7 +171,7 @@ class TestLocationSingleOperation:
             put_result: Response = RsMapsApi.put_location(place_id)
             Checking.check_status_code(put_result, 200)
             Checking.check_json_token(put_result, ["msg"])
-            Checking.check_json_filds(put_result, 'msg', 'Address successfully updated')
+            Checking.check_json_fields(put_result, 'msg', 'Address successfully updated')
             allure.attach(put_result.text, name="PUT Response",
                           attachment_type=allure.attachment_type.JSON)
 
@@ -191,7 +192,7 @@ class TestLocationSingleOperation:
             delete_result: Response = RsMapsApi.delete_location(place_id)
             Checking.check_status_code(delete_result, 200)
             Checking.check_json_token(delete_result, ["status"])
-            Checking.check_json_filds(delete_result, 'status', 'OK')
+            Checking.check_json_fields(delete_result, 'status', 'OK')
             allure.attach(delete_result.text, name="DELETE Response",
                           attachment_type=allure.attachment_type.JSON)
 
@@ -200,7 +201,7 @@ class TestLocationSingleOperation:
             get_result: Response = RsMapsApi.get_location(place_id)
             Checking.check_status_code(get_result, 404)
             Checking.check_json_token(get_result, ["msg"])
-            Checking.check_json_filds(
+            Checking.check_json_fields(
                 get_result,
                 'msg',
                 "Get operation failed, looks like place_id  doesn't exists"
