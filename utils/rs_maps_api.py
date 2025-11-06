@@ -1,15 +1,24 @@
 import allure
+import os
+from dotenv import load_dotenv
 from requests import Response
 
 from utils.http_methods import HttpMethods
 from logger_config import logger
 
-BASE_URL: str = "https://rahulshettyacademy.com"
-KEY: str = "key=qaclick123"
-GET_RESOURCE: str = "/maps/api/place/get/json"
-POST_RESOURCE: str = "/maps/api/place/add/json"
-PUT_RESOURCE: str = "/maps/api/place/update/json"
-DELETE_RESOURCE: str = "/maps/api/place/delete/json"
+
+load_dotenv()
+
+BASE_URL: str = os.getenv('BASE_URL')
+KEY: str = os.getenv('KEY')
+GET_RESOURCE: str = os.getenv('GET_RESOURCE')
+POST_RESOURCE: str = os.getenv('POST_RESOURCE')
+PUT_RESOURCE: str = os.getenv('PUT_RESOURCE')
+DELETE_RESOURCE: str = os.getenv('DELETE_RESOURCE')
+
+required_vars = [BASE_URL, KEY, GET_RESOURCE, POST_RESOURCE, PUT_RESOURCE, DELETE_RESOURCE]
+if any(v is None for v in required_vars):
+    raise EnvironmentError("Некоторые переменные окружения не заданы в .env")
 
 
 

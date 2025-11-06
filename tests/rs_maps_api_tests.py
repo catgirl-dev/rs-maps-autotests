@@ -191,7 +191,7 @@ class TestLocationSingleOperation:
             get_result: Response = RsMapsApi.get_location(place_id)
             Checking.check_status_code(get_result, 200)
             Checking.check_json_token(get_result, [['location', 'name', 'address']])
-            allure.attach(get_result.text, name="GET after PUT Response",
+            allure.attach(get_result.text, name="GET запрос после обновления адреса",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Обновление локации проверено успешно!")
 
@@ -218,6 +218,6 @@ class TestLocationSingleOperation:
                 'msg',
                 "Get operation failed, looks like place_id  doesn't exists"
             )
-            allure.attach(get_result.text, name="GET after DELETE Response",
+            allure.attach(get_result.text, name="Удаление локации проверено успешно!",
                           attachment_type=allure.attachment_type.JSON)
             logger.success("Удаление локации проверено успешно!")
